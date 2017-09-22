@@ -26,4 +26,6 @@ Redmine::Plugin.register :redmine_hr do
   menu :admin_menu, :'hr.label_profile_management', { :controller => 'hr_profiles', :action => 'index' },
        :html => { :class => 'issue_statuses' },
        :caption => :'hr.label_profile_management'
+
+  requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'     
 end
