@@ -39,7 +39,16 @@ class HrUserProfile < ActiveRecord::Base
     hourly_costs = self.profile.present? ? self.profile.costs.inject({}){|h, c| h[c.year] = c.hourly_cost; h} : Hash.new(HrProfilesCost::DEFAULT_HOURLY_COST)
 
     (self.start_date.year..(self.end_date || last_date).year).each do |year|
-      hourly_cost = hourly_costs[year]
+      if hourly_costs.keys.blank?
+        hourly_cost = HrProfilesCost::DEFAULT_HOURLY_COST
+      elsif year > hourly_costs.keys.max
+        hourly_cost = hourly_costs[hourly_costs.keys.max]
+      elsif year < hourly_costs.keys.min
+        hourly_cost = hourly_costs[hourly_costs.keys.min]
+      else
+        hourly_cost = hourly_costs[year]
+      end
+
       profile_id = self.hr_profile_id.present? ? self.hr_profile_id : "NULL"
       self.time_entries.where(tyear: year).update_all("hr_profile_id = #{profile_id}, cost = (#{hourly_cost} * hours)")
     end
