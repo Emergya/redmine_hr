@@ -19,6 +19,8 @@ Redmine::Plugin.register :redmine_hr do
     end
   end
 
+  permission :view_profiles, { :user => [:show] }
+
   menu :admin_menu, :'hr.label_cost_history', { :controller => 'hr_profiles_costs', :action => 'index' },
        :html => { :class => 'issue_statuses' },
        :caption => :'hr.label_cost_history'

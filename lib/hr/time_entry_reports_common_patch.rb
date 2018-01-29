@@ -31,9 +31,12 @@ module HR
       def load_available_criteria_with_profile
         @available_criteria = {}
         @available_criteria = load_available_criteria_without_profile
-        @available_criteria['profile'] = {:joins => :hr_profile, #"LEFT JOIN #{HrProfile.table_name} ON #{HrProfile.table_name}.id = #{TimeEntry.table_name}.hr_profile_id SELECT",
-                                          :sql => "#{HrProfile.table_name}.name",
-                                          :label => :label_profile}
+
+        if User.current.allowed_to?(:view_profiles, nil, {:global => true})
+          @available_criteria['profile'] = {:joins => :hr_profile, #"LEFT JOIN #{HrProfile.table_name} ON #{HrProfile.table_name}.id = #{TimeEntry.table_name}.hr_profile_id SELECT",
+                                            :sql => "#{HrProfile.table_name}.name",
+                                            :label => :label_profile}
+        end                                        
         @available_criteria
       end
     end
