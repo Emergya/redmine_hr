@@ -10,6 +10,7 @@
   <tr class="<%= cycle 'odd', 'even' %>">
     <th><%=l(:field_name)%></th>
     <th><%=l(:field_category)%></th>
+    <th><%=l(:button_sort)%></th>
     <th></th>
   </tr>
 
@@ -17,6 +18,7 @@
   <tr class="<%= cycle 'odd', 'even' %>">
     <td class='name'><%= link_to profile.name, edit_hr_profile_path(profile.id) %></td>
     <td class='center'><%= begin profile.category.name rescue "-" end %></td>
+    <td class="reorder"><%= reorder_links('hr_profile', {:action => 'move', :id => profile.id}, :put) %></td>
     <td class='buttons'>
       <%= delete_link hr_profile_path(profile.id) %>
     </td>
