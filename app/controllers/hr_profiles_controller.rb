@@ -15,7 +15,11 @@ class HrProfilesController < ApplicationController
 
   def create
     @profile = HrProfile.new(profile_params)
-    @profile.position = HrProfile.maximum(:position) + 1
+    unless HrProfile.first.nil?
+      @profile.position = HrProfile.maximum(:position) + 1
+    else
+      @profile.position = 1
+    end
     if @profile.save
       flash[:notice] = l(:notice_successful_create)
       redirect_to hr_profiles_path
