@@ -3,6 +3,10 @@ require 'hr/users_helper_patch'
 require 'hr/user_patch'
 require 'hr/time_entries_patch'
 require 'hr/time_entry_reports_common_patch'
+require 'hr/issue_patch'
+require 'hr/project_patch'
+require 'hr/issue_custom_field_patch'
+require 'hr/setting_patch'
 
 Redmine::Plugin.register :redmine_hr do
   Rails.configuration.after_initialize do
@@ -30,4 +34,5 @@ Redmine::Plugin.register :redmine_hr do
        :caption => :'hr.label_profile_management'
 
   requires_redmine_plugin :redmine_base_deface, :version_or_higher => '0.0.1'     
+  settings :default => {}, :partial => 'settings/hr_settings'
 end

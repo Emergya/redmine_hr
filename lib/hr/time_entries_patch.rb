@@ -9,6 +9,8 @@ module Hr
       base.class_eval do
         belongs_to :hr_profile
         after_save :update_profile_and_cost
+        after_save :update_issue_effort_cost
+        after_destroy :update_issue_effort_cost
       end
     end
 
@@ -38,6 +40,12 @@ module Hr
           HrProfilesCost::DEFAULT_HOURLY_COST)
 
         set_profile_and_cost(profile_id, hourly_cost)
+      end
+
+      def update_issue_effort_cost
+        if issue.present?
+          issue.update_effort_cost
+        end
       end
 
       def remove_profile_and_cost

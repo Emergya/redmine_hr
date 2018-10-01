@@ -1,0 +1,10 @@
+<fieldset>
+	<div class="splitcontentleft">
+		<p>
+			<label><%=l(:"hr.label_issue_effort_cost_field")%></label>
+	    	<%= select_tag 'settings[issue_effort_cost_field]',
+	          ('<option></option>' +
+	            options_from_collection_for_select(IssueCustomField.all, :id, :name, @settings['issue_effort_cost_field'])).html_safe %>
+		</p>
+	</div>
+</fieldset>
