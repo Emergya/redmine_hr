@@ -15,7 +15,7 @@ module Hr
 
     module InstanceMethods
       def change_issue_effort_cost_field
-        if self.name == 'plugin_redmine_hr' and self.value['issue_effort_cost_field'].present? and self.value['issue_effort_cost_field'] != self.value_was['issue_effort_cost_field']
+        if self.name == 'plugin_redmine_hr' and self.value['issue_effort_cost_field'].present? and (self.value_was.blank? or (self.value['issue_effort_cost_field'] != self.value_was['issue_effort_cost_field']))
           cf = IssueCustomField.find(self.value['issue_effort_cost_field'])
           Issue.where("project_id IN (?) AND tracker_id IN (?)", cf.projects.map(&:id), cf.trackers.map(&:id)).map(&:update_effort_cost)
         end
