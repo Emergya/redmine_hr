@@ -13,8 +13,11 @@ module Hr
 
     module InstanceMethods
       def update_effort_cost
-        if get_effort_cost_field.present?
-          get_effort_cost_field.update_attribute('value', get_effort_cost)
+        cv = get_effort_cost_field
+        if cv.present?
+          value = get_effort_cost
+          value = value.to_s+" €" if cv.custom_field.field_format == 'string'
+          cv.update_attribute('value', value)
         end
       end
 
