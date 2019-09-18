@@ -24,6 +24,10 @@ class HrProfile < ActiveRecord::Base
 		end
 	end
 
+	def to_s
+		name
+	end
+
 	private
 	def create_costs
 		HrProfilesCost.years.each do |year|
