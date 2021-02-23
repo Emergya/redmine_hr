@@ -3,6 +3,7 @@ es:
   field_hr_profiles_category: Categoría
   field_start_date: Fecha de inicio
   field_end_date: Fecha de fin
+  field_obsolescence_date: Fecha de obsolescencia
 
   hr:
     plugin_name: Cuadro de Mando Integral (HHRR)

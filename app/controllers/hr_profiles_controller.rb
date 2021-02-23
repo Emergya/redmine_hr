@@ -86,7 +86,7 @@ class HrProfilesController < ApplicationController
 
   private
   def profile_params
-    params.require(:hr_profile).permit(:name, :hr_profiles_category_id)
+    params.require(:hr_profile).permit(:name, :hr_profiles_category_id, :obsolescence_date)
   end
 
   def get_profile

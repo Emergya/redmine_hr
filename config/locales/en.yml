@@ -3,6 +3,7 @@ en:
   field_hr_profiles_category: Category
   field_start_date: Start date
   field_end_date: End date
+  field_obsolescence_date: Obsolescence date
 
   hr:
     plugin_name: Balanced Score Card (HHRR)
